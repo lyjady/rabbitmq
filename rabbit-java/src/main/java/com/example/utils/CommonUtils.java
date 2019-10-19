@@ -17,7 +17,7 @@ public class CommonUtils {
         //1.创建连接工厂
         ConnectionFactory factory = new ConnectionFactory();
         //2.设置主机
-        factory.setHost("localhost");
+        factory.setHost("192.168.0.110");
         //3.设置端口号
         factory.setPort(5672);
         //4.设置用户名
