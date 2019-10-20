@@ -22,9 +22,11 @@ public class Consumer {
         Channel channel = connection.createChannel();
         //3.创建队列声明
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        //一次只发给一条消息给消费者
+//        channel.basicQos(1);
         //4.监听队列
         while (true) {
-            channel.basicConsume(QUEUE_NAME, true, new com.rabbitmq.client.Consumer() {
+            channel.basicConsume(QUEUE_NAME, false, new com.rabbitmq.client.Consumer() {
                 @Override
                 public void handleConsumeOk(String consumerTag) {
 
@@ -52,15 +54,17 @@ public class Consumer {
 
                 @Override
                 public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-                    String message = new String(body, StandardCharsets.UTF_8);
-                    System.out.println(message);
+                   try {
+                       String message = new String(body, StandardCharsets.UTF_8);
+                       System.out.println(message);
+//                       Thread.sleep(1000L);
+                       //手动签收
+                       channel.basicAck(envelope.getDeliveryTag(), false);
+                   } catch (Exception e) {
+                       e.printStackTrace();
+                   }
                 }
             });
-
-            while (true) {
-                Thread.sleep(5000L);
-                System.out.println("监听程序在执行!!!!");
-            }
         }
     }
 }

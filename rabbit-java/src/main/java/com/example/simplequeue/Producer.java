@@ -23,7 +23,7 @@ public class Producer {
         Channel channel = connection.createChannel();
         //3.创建队列声明
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             String message = "simple-queue-message" + i;
             //4.发送消息
             channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
