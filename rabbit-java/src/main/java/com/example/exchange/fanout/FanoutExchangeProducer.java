@@ -1,4 +1,4 @@
-package com.example.publishsubscription;
+package com.example.exchange.fanout;
 
 import com.example.utils.CommonUtils;
 import com.rabbitmq.client.BuiltinExchangeType;
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeoutException;
  * @author LinYongJin
  * @date 2019/10/20 15:14
  */
-public class ExchangeProducer {
+public class FanoutExchangeProducer {
 
     private static final String EXCHANGE_NAME = "test_exchange_fanout";
 
