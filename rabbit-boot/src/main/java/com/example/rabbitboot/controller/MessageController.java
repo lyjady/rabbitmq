@@ -15,9 +15,21 @@ public class MessageController {
     @Autowired
     private BootProducer bootProducer;
 
-    @RequestMapping("/send")
-    public String send(String queueName) {
-        bootProducer.sendMessage(queueName);
+    @RequestMapping("/sendFanout")
+    public String sendFanout() {
+        bootProducer.sendFanoutMessage();
+        return "Success";
+    }
+
+    @RequestMapping("/sendDirect")
+    public String sendDirect(String routingKey) {
+        bootProducer.sendDirectMessage(routingKey);
+        return "Success";
+    }
+
+    @RequestMapping("/sendTopic")
+    public String sendTopic(String routingKey) {
+        bootProducer.sendTopicMessage(routingKey);
         return "Success";
     }
 

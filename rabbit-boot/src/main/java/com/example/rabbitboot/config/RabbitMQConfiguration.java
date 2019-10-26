@@ -1,9 +1,6 @@
 package com.example.rabbitboot.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +16,10 @@ public class RabbitMQConfiguration {
     private static final String SMS_QUEUE_NAME = "sms_queue";
 
     public static final String FANOUT_EXCHANGE_NAME = "fanout_exchange";
+
+    public static final String DIRECT_EXCHANGE_NAME = "direct_exchange";
+
+    public static final String TOPIC_EXCHANGE_NAME = "topic_exchange";
 
     @Bean
     public Queue emailQueue() {
@@ -36,6 +37,16 @@ public class RabbitMQConfiguration {
     }
 
     @Bean
+    public DirectExchange directExchange() {
+        return new DirectExchange(DIRECT_EXCHANGE_NAME);
+    }
+
+    @Bean
+    public TopicExchange topicExchange() {
+        return new TopicExchange(TOPIC_EXCHANGE_NAME);
+    }
+
+    @Bean
     public Binding bindingExchangeEmail(Queue emailQueue, FanoutExchange fanoutExchange) {
         return BindingBuilder.bind(emailQueue).to(fanoutExchange);
     }
@@ -43,5 +54,25 @@ public class RabbitMQConfiguration {
     @Bean
     public Binding bindingExchangeSms(Queue smsQueue, FanoutExchange fanoutExchange) {
         return BindingBuilder.bind(smsQueue).to(fanoutExchange);
+    }
+
+    @Bean
+    public Binding bindingDirectExchangeEmail(Queue emailQueue, DirectExchange directExchange) {
+        return BindingBuilder.bind(emailQueue).to(directExchange).with("log.email");
+    }
+
+    @Bean
+    public Binding bindingDirectExchangeSms(Queue smsQueue, DirectExchange directExchange) {
+        return BindingBuilder.bind(smsQueue).to(directExchange).with("log.sms");
+    }
+
+    @Bean
+    public Binding bindingTopicExchangeEmail(Queue emailQueue, TopicExchange topicExchange) {
+        return BindingBuilder.bind(emailQueue).to(topicExchange).with("*.email");
+    }
+
+    @Bean
+    public Binding bindingTopicExchangeSms(Queue smsQueue, TopicExchange topicExchange) {
+        return BindingBuilder.bind(smsQueue).to(topicExchange).with("#.sms");
     }
 }

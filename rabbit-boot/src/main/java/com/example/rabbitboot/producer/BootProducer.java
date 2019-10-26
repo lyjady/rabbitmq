@@ -17,8 +17,18 @@ public class BootProducer {
     @Autowired
     private AmqpTemplate amqpTemplate;
 
-    public void sendMessage(String queueName) {
+    public void sendFanoutMessage() {
         String message = "boot message fanout exchange" + new Date();
         amqpTemplate.convertAndSend(RabbitMQConfiguration.FANOUT_EXCHANGE_NAME, "", message);
+    }
+
+    public void sendDirectMessage(String routingKey) {
+        String message = "boot message direct exchange" + new Date();
+        amqpTemplate.convertAndSend(RabbitMQConfiguration.DIRECT_EXCHANGE_NAME, routingKey, message);
+    }
+
+    public void sendTopicMessage(String routingKey) {
+        String message = "boot message topic exchange" + new Date();
+        amqpTemplate.convertAndSend(RabbitMQConfiguration.TOPIC_EXCHANGE_NAME, routingKey, message);
     }
 }
