@@ -1,0 +1,16 @@
+server:
+  port: 7000
+spring:
+  rabbitmq:
+    addresses: 192.168.0.110
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /boot_test
+    listener:
+      simple:
+        acknowledge-mode: auto
+        retry:
+          enabled: true
+          max-attempts: 5
+          max-interval: 5000

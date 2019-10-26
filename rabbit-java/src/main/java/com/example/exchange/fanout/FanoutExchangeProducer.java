@@ -22,8 +22,19 @@ public class FanoutExchangeProducer {
         //生产者声明交换机(交换机名称,交换机类型)
         channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
         for (int i = 0; i < 5; i++) {
-            String message = "exchange-message-" + i;
-            channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes());
+            try {
+                //开启事务
+                channel.txSelect();
+                String message = "exchange-message-" + i;
+                channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes());
+                int num = 1 / 0;
+                //提交事务
+                channel.txCommit();
+            } catch (Exception e) {
+                //事务回滚
+                channel.txRollback();
+                e.printStackTrace();
+            }
         }
         channel.close();
         connection.close();

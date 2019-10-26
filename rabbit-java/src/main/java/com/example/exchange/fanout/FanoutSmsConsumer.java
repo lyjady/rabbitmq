@@ -21,7 +21,7 @@ public class FanoutSmsConsumer {
         Connection connection = CommonUtils.getRabbitMQConnection();
         Channel channel = connection.createChannel();
         //消费者声明队列
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        channel.queueDeclare(QUEUE_NAME, true, false, false, null);
         //队列绑定交换机
         channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, "");
         channel.basicConsume(QUEUE_NAME, true, new Consumer() {
