@@ -4,6 +4,9 @@ import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author LinYongJin
  * @date 2019/10/26 16:47
@@ -21,10 +24,37 @@ public class RabbitMQConfiguration {
 
     public static final String TOPIC_EXCHANGE_NAME = "topic_exchange";
 
+    public static final String DEAD_QUEUE = "dead_queue";
+
+    public static final String DEAD_EXCHANGE = "dead_exchange";
+
+    @Bean
+    public Queue deadQueue() {
+        return new Queue(DEAD_QUEUE, true);
+    }
+
+    @Bean
+    public DirectExchange deadExchange() {
+        return new DirectExchange(DEAD_EXCHANGE);
+    }
+
+    @Bean
+    public Binding bindingDeadExchange(Queue deadQueue, DirectExchange deadExchange) {
+        return BindingBuilder.bind(deadQueue).to(deadExchange).with("dead.message");
+    }
+
     @Bean
     public Queue emailQueue() {
-        return new Queue(EMAIL_QUEUE_NAME);
+        Map<String, Object> args = new HashMap<>(2);
+        args.put("x-dead-letter-exchange", DEAD_EXCHANGE);
+        args.put("x-dead-letter-routing-key", "dead.message");
+        return new Queue(EMAIL_QUEUE_NAME, true, false, false, args);
     }
+
+//    @Bean
+//    public Queue emailQueue() {
+//        return new Queue(EMAIL_QUEUE_NAME);
+//    }
 
     @Bean
     public Queue smsQueue() {

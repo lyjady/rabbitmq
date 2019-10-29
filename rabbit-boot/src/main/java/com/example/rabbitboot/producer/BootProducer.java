@@ -2,10 +2,14 @@ package com.example.rabbitboot.producer;
 
 import com.example.rabbitboot.config.RabbitMQConfiguration;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author LinYongJin
@@ -23,7 +27,9 @@ public class BootProducer {
     }
 
     public void sendDirectMessage(String routingKey) {
-        String message = "boot message direct exchange" + new Date();
+        String messageID = UUID.randomUUID().toString().replace("-", "");
+        Message message = MessageBuilder.withBody("boot message direct exchange".getBytes()).setContentEncoding("UTF-8").setMessageId(messageID).build();
+        System.out.println(messageID);
         amqpTemplate.convertAndSend(RabbitMQConfiguration.DIRECT_EXCHANGE_NAME, routingKey, message);
     }
 

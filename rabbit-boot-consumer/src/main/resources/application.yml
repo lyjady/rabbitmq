@@ -9,7 +9,7 @@ spring:
     virtual-host: /boot_test
     listener:
       simple:
-        acknowledge-mode: auto
+        acknowledge-mode: manual
         retry:
           enabled: true
           max-attempts: 5

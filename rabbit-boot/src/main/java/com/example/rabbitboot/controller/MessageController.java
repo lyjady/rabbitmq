@@ -37,4 +37,11 @@ public class MessageController {
     public String unionPay() {
         return "Success";
     }
+
+    @RequestMapping("/dead")
+    public String sendDeadMessage() {
+        bootProducer.sendDirectMessage("log.email");
+        return "Success";
+    }
+
 }
