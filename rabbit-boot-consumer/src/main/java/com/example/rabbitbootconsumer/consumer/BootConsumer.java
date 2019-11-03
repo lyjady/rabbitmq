@@ -10,6 +10,7 @@ import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -49,6 +50,15 @@ public class BootConsumer {
     @RabbitListener(queues = "dead_queue")
     public void consumerDeadMessage(Message message, @Headers Map<String, Object> headers, Channel channel) throws IOException {
         System.out.println("死信消费者: " + message);
+        //手动ack
+        Long deliveryTag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
+        //手动签收
+        channel.basicAck(deliveryTag, false);
+    }
+
+    @RabbitListener(queues = "order_queue")
+    public void consumerOrderMessage(Message message, @Headers Map<String, Object> headers, Channel channel) throws IOException {
+        System.out.println("订单消息: " + new String(message.getBody(), StandardCharsets.UTF_8));
         //手动ack
         Long deliveryTag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
         //手动签收

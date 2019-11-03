@@ -1,6 +1,7 @@
 package com.example.rabbitboot.controller;
 
 import com.example.rabbitboot.producer.BootProducer;
+import com.example.rabbitboot.producer.OrderProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,9 @@ public class MessageController {
 
     @Autowired
     private BootProducer bootProducer;
+
+    @Autowired
+    private OrderProducer orderProducer;
 
     @RequestMapping("/sendFanout")
     public String sendFanout() {
@@ -44,4 +48,9 @@ public class MessageController {
         return "Success";
     }
 
+    @RequestMapping("/sendOrder")
+    public String sendOrderMessage() {
+        orderProducer.sendOrderMessage("order");
+        return "Success";
+    }
 }

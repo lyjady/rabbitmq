@@ -28,6 +28,18 @@ public class RabbitMQConfiguration {
 
     public static final String DEAD_EXCHANGE = "dead_exchange";
 
+    public static final String ORDER_QUEUE_NAME = "order_queue";
+
+    @Bean
+    public Queue orderQueue() {
+        return new Queue(ORDER_QUEUE_NAME, true);
+    }
+
+    @Bean
+    public Binding bindingDirectExchangeOrder(Queue orderQueue, DirectExchange directExchange) {
+        return BindingBuilder.bind(orderQueue).to(directExchange).with("order");
+    }
+
     @Bean
     public Queue deadQueue() {
         return new Queue(DEAD_QUEUE, true);
