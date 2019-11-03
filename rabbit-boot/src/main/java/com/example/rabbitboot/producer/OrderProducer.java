@@ -36,12 +36,14 @@ public class OrderProducer implements RabbitTemplate.ConfirmCallback, RabbitTemp
         if (b) {
             System.out.println("发送成功, correlationData: " + correlationData.getId());
         } else {
+            //消息重发
             System.out.println("发送失败, 原因: " + s);
         }
     }
 
     @Override
     public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
+        //消息重发
         System.out.println(message + ", " + replyText + ", " + replyText + ", " + exchange + ", " + routingKey);
     }
 }
