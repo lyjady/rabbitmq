@@ -1,0 +1,12 @@
+server:
+  port: 8000
+spring:
+  rabbitmq:
+    addresses: 192.168.0.110:5673,192.168.0.110:5674,192.168.0.110:5675
+    username: guest
+    password: guest
+    virtual-host: /
+    publisher-returns: true
+    publisher-confirm-type: correlated
+    template:
+      mandatory: true

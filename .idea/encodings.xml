@@ -3,7 +3,9 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/rabbit-boot" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rabbit-boot-consumer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rabbit-consumer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rabbit-java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rabbit-producer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rabbitmq-java" charset="UTF-8" />
   </component>
 </project>

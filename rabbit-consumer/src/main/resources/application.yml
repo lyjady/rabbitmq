@@ -1,0 +1,15 @@
+server:
+  port: 8001
+spring:
+  rabbitmq:
+    addresses: 192.168.0.110:5673,192.168.0.110:5674,192.168.0.110:5675
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual
+        retry:
+          enabled: true
+          max-attempts: 5
+          max-interval: 5000

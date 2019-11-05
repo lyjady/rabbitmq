@@ -43,6 +43,7 @@ public class OrderProducer implements RabbitTemplate.ConfirmCallback, RabbitTemp
 
     @Override
     public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
+        System.out.println("OrderProducer.returnedMessage");
         //消息重发
         System.out.println(message + ", " + replyText + ", " + replyText + ", " + exchange + ", " + routingKey);
     }

@@ -6,6 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="rabbit-producer" />
+        <module name="rabbit-consumer" />
         <module name="rabbit-java" />
         <module name="rabbit-boot" />
         <module name="rabbit-boot-consumer" />
@@ -14,7 +16,9 @@
     <bytecodeTargetLevel>
       <module name="rabbit-boot" target="1.8" />
       <module name="rabbit-boot-consumer" target="1.8" />
+      <module name="rabbit-consumer" target="1.8" />
       <module name="rabbit-java" target="1.8" />
+      <module name="rabbit-producer" target="1.8" />
       <module name="rabbitmq-java" target="1.7" />
     </bytecodeTargetLevel>
   </component>
@@ -22,6 +26,8 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="rabbit-boot" options="-parameters" />
       <module name="rabbit-boot-consumer" options="-parameters" />
+      <module name="rabbit-consumer" options="-parameters" />
+      <module name="rabbit-producer" options="-parameters" />
     </option>
   </component>
 </project>

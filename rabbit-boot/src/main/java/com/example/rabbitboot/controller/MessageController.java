@@ -49,8 +49,8 @@ public class MessageController {
     }
 
     @RequestMapping("/sendOrder")
-    public String sendOrderMessage() {
-        orderProducer.sendOrderMessage("order");
+    public String sendOrderMessage(String routingKey) {
+        orderProducer.sendOrderMessage(routingKey);
         return "Success";
     }
 }
