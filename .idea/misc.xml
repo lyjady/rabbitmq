@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/rabbit-boot-consumer/pom.xml" />
         <option value="$PROJECT_DIR$/rabbit-producer/pom.xml" />
         <option value="$PROJECT_DIR$/rabbit-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/rabbitmq/pom.xml" />
       </list>
     </option>
   </component>

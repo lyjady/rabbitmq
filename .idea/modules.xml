@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/rabbit-consumer/rabbit-consumer.iml" filepath="$PROJECT_DIR$/rabbit-consumer/rabbit-consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/rabbit-java/rabbit-java.iml" filepath="$PROJECT_DIR$/rabbit-java/rabbit-java.iml" />
       <module fileurl="file://$PROJECT_DIR$/rabbit-producer/rabbit-producer.iml" filepath="$PROJECT_DIR$/rabbit-producer/rabbit-producer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rabbitmq/rabbitmq.iml" filepath="$PROJECT_DIR$/rabbitmq/rabbitmq.iml" />
     </modules>
   </component>
 </project>
